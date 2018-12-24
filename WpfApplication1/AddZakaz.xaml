@@ -1,0 +1,40 @@
+﻿<Window x:Class="WpfApplication1.AddZakaz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d"
+        Title="AddZakaz" Height="363.26" Width="527.711">
+    <Grid Margin="0,0,2,0">
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="28,85,0,0" TextWrapping="Wrap" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="198,85,0,0" TextWrapping="Wrap" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="366,85,0,0" TextWrapping="Wrap" Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="28,128,0,0" TextWrapping="Wrap" Text="{Binding Adress, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="458"/>
+        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="28,36,0,0" TextWrapping="Wrap" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="142"/>
+        <DatePicker HorizontalAlignment="Left" Margin="268,213,0,0" VerticalAlignment="Top" Width="218" SelectedDate="{Binding Date}"/>
+        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="28,264,0,0" TextWrapping="Wrap" Text="{Binding Gruz, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="142"/>
+        <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="198,264,0,0" TextWrapping="Wrap" Text="{Binding Km, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox7" HorizontalAlignment="Left" Height="23" Margin="366,264,0,0" TextWrapping="Wrap" Text="{Binding PriceGruz, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox" ItemsSource="{Binding tipg, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedTipGruza}"
+                IsSynchronizedWithCurrentItem="True"                     
+                DisplayMemberPath="Name"
+                SelectedValuePath="Id" HorizontalAlignment="Left" Margin="28,213,0,0" VerticalAlignment="Top" Width="202"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="28,64,0,0" TextWrapping="Wrap" Text="Фамилия *" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="198,64,0,0" TextWrapping="Wrap" Text="Имя *" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="366,64,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="28,108,0,0" TextWrapping="Wrap" Text="Адрес *" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="28,15,0,0" TextWrapping="Wrap" Text="Номер телефона *" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="28,243,0,0" TextWrapping="Wrap" Text="Груз *" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Margin="198,243,0,0" TextWrapping="Wrap" Text="Расстояние(км) *" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Margin="366,242,0,0" TextWrapping="Wrap" Text="Цена груза *" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="268,197,0,0" TextWrapping="Wrap" Text="Дата рождения *" VerticalAlignment="Top"/>
+        <Button x:Name="button" Command="{Binding AddZakaz}" Content="Добавить" HorizontalAlignment="Left" Margin="366,302,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="textBlock_Copy8" HorizontalAlignment="Left" Margin="28,196,0,0" TextWrapping="Wrap" Text="Тип груза *" VerticalAlignment="Top"/>
+        <Button x:Name="button1" Command="{Binding CheckClient}" Content="Поиск" HorizontalAlignment="Left" Margin="198,36,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox3_Copy" HorizontalAlignment="Left" Height="23" Margin="28,171,0,0" TextWrapping="Wrap" Text="{Binding AdressDostavki, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="458"/>
+        <TextBlock x:Name="textBlock_Copy9" HorizontalAlignment="Left" Margin="28,151,0,0" TextWrapping="Wrap" Text="Адрес доставки *" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
