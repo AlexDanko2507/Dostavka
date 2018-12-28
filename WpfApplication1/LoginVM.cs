@@ -73,10 +73,10 @@ namespace WpfApplication1
                                 }
                                 else
                                 {
-                                    MainWindow main = new MainWindow();
+                                    DostavkaWindow main = new DostavkaWindow();
 
                                     WindowMeneger.CloseWindow(ViewID);
-                                    //main.DataContext = new MainViewModel1(db);
+                                    main.DataContext = new DostavkaVM(db, Login);
                                     main.Show();
                                 }
                             }

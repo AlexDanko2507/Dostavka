@@ -169,7 +169,9 @@ namespace ViewModel
                 Status = i.Status,
                 StatusName = db.Status.Where(y => y.Id == i.Status).FirstOrDefault().Name,
                 Tip_gruza = i.Tip_gruza,
-                Tip_gruzaName = db.Tip_gruza.Where(y => y.Id == i.Tip_gruza).FirstOrDefault().Name
+                Tip_gruzaName = db.Tip_gruza.Where(y => y.Id == i.Tip_gruza).FirstOrDefault().Name,
+                AdressDostavki = i.AdressDostavki,
+                DataOformleniya = i.DataOformleniya
             };
         }
 

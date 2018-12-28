@@ -26,6 +26,7 @@ namespace ViewModel.Model
         private int Operatorr { get; set; }
         private string OperatorrName { get; set; }
         private string adressDostavki { get; set; }
+        private DateTime dataOformleniya { get; set; }
 
         public int Id
         {
@@ -64,6 +65,16 @@ namespace ViewModel.Model
             {
                 dataVruchenia = value;
                 OnPropertyChanged("DataVruchenia");
+            }
+        }
+
+        public DateTime DataOformleniya
+        {
+            get { return dataOformleniya; }
+            set
+            {
+                dataOformleniya = value;
+                OnPropertyChanged("DataOformleniya");
             }
         }
 

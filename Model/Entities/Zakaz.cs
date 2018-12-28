@@ -44,5 +44,7 @@ namespace Model
         [Required]
         [StringLength(150)]
         public string AdressDostavki { get; set; }
+
+        public DateTime DataOformleniya { get; set; }
     }
 }

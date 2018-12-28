@@ -15,15 +15,13 @@ using System.Windows.Shapes;
 namespace WpfApplication1
 {
     /// <summary>
-    /// Логика взаимодействия для CourierWindow.xaml
+    /// Логика взаимодействия для DostavkaWindow.xaml
     /// </summary>
-    public partial class CourierWindow : Window
+    public partial class DostavkaWindow : Window
     {
-        public CourierWindow()
+        public DostavkaWindow()
         {
             InitializeComponent();
-            //CourierWindow vm = new CourierWindow();
-            //DataContext = vm;
         }
     }
 }

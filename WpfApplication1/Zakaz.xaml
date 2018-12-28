@@ -5,43 +5,313 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="Zakaz" Height="382.386" Width="657.506">
+        Title="Zakaz" Height="373.386" Width="657.506" ResizeMode="NoResize">
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="649">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="341" VerticalAlignment="Top" Width="649">
             <TabItem Header="Клиенты">
-                <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox" ItemsSource="{Binding cl}" SelectedItem="{Binding SelectedClient}" HorizontalAlignment="Left" Height="247" Margin="10,10,0,0" VerticalAlignment="Top" Width="248">
+                <Grid Background="#FFE5E5E5" Margin="0,-1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="246*"/>
+                        <ColumnDefinition Width="397*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox x:Name="listBox" ItemsSource="{Binding cl}" SelectedItem="{Binding SelectedClient}" HorizontalAlignment="Left" Height="219" Margin="10,49,0,0" VerticalAlignment="Top" Width="248" Grid.ColumnSpan="2">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                <TextBlock  FontSize="18" Text="{Binding Path=FirstName}" />
-                                <TextBlock  Text="{Binding Path=LastName}" />
-                                <TextBlock   Text="{Binding Path=MiddleName}" />   
+                                    <TextBlock  FontSize="18" Text="{Binding Path=FirstName}" />
+                                    <TextBlock  Text="{Binding Path=LastName}" />
+                                    <TextBlock   Text="{Binding Path=MiddleName}" />
                                 </StackPanel>
-                             </DataTemplate>
+                            </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <Button x:Name="button" Content="Добавить скидку" Command="{Binding AddUchet}" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.15"/>
-                    <Grid Margin="263,29,10,131" DataContext="{Binding SelectedClient}">
-                        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-                        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="125,0,0,0" TextWrapping="Wrap" Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-                        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="250,0,0,0" TextWrapping="Wrap" Text="{Binding Path=MiddleName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-                        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="0,51,0,0" TextWrapping="Wrap" Text="{Binding Path=Adress, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="370"/>
-                        <DatePicker SelectedDate="{Binding HappyBirthday}" HorizontalAlignment="Left" Margin="0,94,0,0" VerticalAlignment="Top" Width="183"/>
-                        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="200,94,0,0" TextWrapping="Wrap" Text="{Binding Path=Phone, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="170"/>
-                        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="0,140,0,0" TextWrapping="Wrap" Text="{Binding Path=Skidka, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="button" Content="Удалить клиента" Command="{Binding DelClient}" HorizontalAlignment="Left" Margin="278,248,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.15" Grid.Column="1"/>
+                    <Grid Margin="17,29,10,99" DataContext="{Binding SelectedClient}" Grid.Column="1">
+                        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="0,39,0,0"/>
+                        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="125,39,0,0" TextWrapping="Wrap" Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="250,39,0,0" TextWrapping="Wrap" Text="{Binding Path=MiddleName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="0,90,0,0" TextWrapping="Wrap" Text="{Binding Path=Adress, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="370"/>
+                        <DatePicker SelectedDate="{Binding HappyBirthday}" HorizontalAlignment="Left" Margin="0,133,0,0" VerticalAlignment="Top" Width="183"/>
+                        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="200,133,0,0" TextWrapping="Wrap" Text="{Binding Path=Phone, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="170"/>
+                        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="0,179,0,-15" TextWrapping="Wrap" Text="{Binding Path=Skidka, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
                     </Grid>
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="17,49,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="142,50,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+                    <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="267,50,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+                    <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Margin="17,100,0,0" TextWrapping="Wrap" Text="Адрес" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+                    <TextBlock x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Margin="17,147,0,0" TextWrapping="Wrap" Text="День рождения" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+                    <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="217,145,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+                    <TextBlock x:Name="textBlock1_Copy4" HorizontalAlignment="Left" Margin="17,189,0,0" TextWrapping="Wrap" Text="Скидка" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+                    <Button x:Name="button_Copy" Content="Сохранить изменения" Command="{Binding SaveClient}" HorizontalAlignment="Left" Margin="139,248,0,0" VerticalAlignment="Top" Width="127" RenderTransformOrigin="0.107,0.15" Grid.Column="1"/>
+                    <Button x:Name="button_Copy1" Content="Добавить клиента" Command="{Binding AddClient}" HorizontalAlignment="Left" Margin="17,248,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.15" Grid.Column="1"/>
+                    <Button x:Name="button3" Command="{Binding OnOtchet}" Content="Просмотр заказов" Grid.Column="1" HorizontalAlignment="Left" Margin="142,210,0,0" VerticalAlignment="Top" Width="246"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Сотрудники">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem  Header="Курьеры" DataContext="{Binding cr}" HorizontalAlignment="Left" Width="82">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox ItemsSource="{Binding courier}" SelectedItem="{Binding SelectedCourier}" HorizontalAlignment="Left" Height="219" Margin="10,49,0,0" VerticalAlignment="Top" Width="623">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock  FontSize="18" Text="{Binding Path=FirstName}" />
+                                    <TextBlock  Text="{Binding Path=LastName}" />
+                                    <TextBlock  Text="{Binding Path=MiddleName}" />
+                                    <TextBlock  Text="{Binding Path=Phone}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button x:Name="button2" Command="{Binding OnOtchet}" Content="Отчет о заказах" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="95"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="Транспорт">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Операторы" DataContext="{Binding or}" HorizontalAlignment="Left" Width="82">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox ItemsSource="{Binding operat}" SelectedItem="{Binding SelectedOperator}" HorizontalAlignment="Left" Height="219" Margin="10,49,0,0" VerticalAlignment="Top" Width="623">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock  FontSize="18" Text="{Binding Path=FirstName}" />
+                                    <TextBlock  Text="{Binding Path=LastName}" />
+                                    <TextBlock  Text="{Binding Path=MiddleName}" />
+                                    <TextBlock  Text="{Binding Path=Phone}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button x:Name="button2_Copy" Command="{Binding OnOtchet}" Content="Отчет о заказах" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="95"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="Заказы">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Транспорт" DataContext="{Binding tr}">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox  ItemsSource="{Binding transport}" SelectedItem="{Binding SelectedTransport}" HorizontalAlignment="Left" Height="219" Margin="10,22,0,0" VerticalAlignment="Top" Width="248">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock  FontSize="18" Text="{Binding Path=Mark}" />
+                                    <TextBlock  Text="{Binding Path=Number}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid DataContext="{Binding SelectedTransport}">
+                        <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="10,246,0,0" TextWrapping="Wrap" Text="{Binding Path=Mark, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="textBox6_Copy" HorizontalAlignment="Left" Height="23" Margin="136,246,0,0" TextWrapping="Wrap" Text="{Binding Path=Number, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                    </Grid>
+                    <Button x:Name="button1" Command="{Binding AddTransport}" Content="Добавить" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="button1_Copy" Command="{Binding SaveTransport}" Content="Сохранить" HorizontalAlignment="Left" Margin="95,274,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="button1_Copy1" Command="{Binding DelTransport}" Content="Удалить" HorizontalAlignment="Left" Margin="181,274,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="60,3,0,0" TextWrapping="Wrap" Text="Транспорт компании" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+
+                    <ListBox  ItemsSource="{Binding tipgruza}" SelectedItem="{Binding SelectedTipGruza}" HorizontalAlignment="Left" Height="219" Margin="373,22,0,0" VerticalAlignment="Top" Width="248">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock  FontSize="18" Text="{Binding Name}" />
+
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="Коэффицент: {0}">
+                                                <Binding Path ="K"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="465,3,0,0" TextWrapping="Wrap" Text="Тип груза" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                    <Grid DataContext="{Binding SelectedTipGruza}">
+                        <TextBox x:Name="textBox6_Copy1" HorizontalAlignment="Left" Height="23" Margin="375,246,0,0" TextWrapping="Wrap" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="textBox6_Copy2" HorizontalAlignment="Left" Height="23" Margin="501,246,0,0" TextWrapping="Wrap" Text="{Binding K, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                    </Grid>
+                    <Button x:Name="button1_Copy2" Command="{Binding AddTipGruza}" Content="Добавить" HorizontalAlignment="Left" Margin="375,274,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="button1_Copy3" Command="{Binding SaveTipGruza}" Content="Сохранить" HorizontalAlignment="Left" Margin="460,274,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="button1_Copy4" Command="{Binding DelTipGruza}" Content="Удалить" HorizontalAlignment="Left" Margin="546,274,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заказы" DataContext="{Binding zr}">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl x:Name="tabControl1" HorizontalAlignment="Left" Height="313" VerticalAlignment="Top" Width="643">
+                        <TabItem Header="В обработке" DataContext="{Binding z1}">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView ItemsSource="{Binding Path = MZakaz,  UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedZakaz, UpdateSourceTrigger=PropertyChanged}" Margin="0,42,0,0">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Клиент">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Client1.FirstName"/>
+                                                        <Binding Path="Client1.LastName"/>
+                                                        <Binding Path="Client1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path = Gruz}"/>
+                                            <GridViewColumn Header="Тип груза" DisplayMemberBinding="{Binding Path = Tip_gruza1.Name}"/>
+                                            <GridViewColumn Header="Адрес доставки" DisplayMemberBinding="{Binding Path = AdressDostavki}"/>
+                                            <GridViewColumn Header="Стоимость" DisplayMemberBinding="{Binding Path = Price_gruz}"/>
+                                            <GridViewColumn Header="Курьер">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Dostavka1.Courier1.FirstName"/>
+                                                        <Binding Path="Dostavka1.Courier1.LastName"/>
+                                                        <Binding Path="Dostavka1.Courier1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Дата оформления" DisplayMemberBinding="{Binding Path = DataOformleniya}"/>
+                                            <GridViewColumn Header="Дата закрытия" DisplayMemberBinding="{Binding Path = DataVruchenia}"/>
+                                            <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path = Status1.Name}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Grid DataContext="{Binding MZakaz}">
+                                    <TextBlock HorizontalAlignment="Left" Margin="7,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="Количество записей: {0}">
+                                                <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Доставляется" DataContext="{Binding z2}">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView ItemsSource="{Binding Path = MZakaz,  UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedZakaz, UpdateSourceTrigger=PropertyChanged}" Margin="0,42,0,0">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Клиент">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Client1.FirstName"/>
+                                                        <Binding Path="Client1.LastName"/>
+                                                        <Binding Path="Client1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path = Gruz}"/>
+                                            <GridViewColumn Header="Тип груза" DisplayMemberBinding="{Binding Path = Tip_gruza1.Name}"/>
+                                            <GridViewColumn Header="Адрес доставки" DisplayMemberBinding="{Binding Path = AdressDostavki}"/>
+                                            <GridViewColumn Header="Стоимость" DisplayMemberBinding="{Binding Path = Price_gruz}"/>
+                                            <GridViewColumn Header="Курьер">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Dostavka1.Courier1.FirstName"/>
+                                                        <Binding Path="Dostavka1.Courier1.LastName"/>
+                                                        <Binding Path="Dostavka1.Courier1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Дата оформления" DisplayMemberBinding="{Binding Path = DataOformleniya}"/>
+                                            <GridViewColumn Header="Дата закрытия" DisplayMemberBinding="{Binding Path = DataVruchenia}"/>
+                                            <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path = Status1.Name}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Grid DataContext="{Binding MZakaz}">
+                                    <TextBlock HorizontalAlignment="Left" Margin="7,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="Количество записей: {0}">
+                                                <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Доставлен" DataContext="{Binding z3}">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView ItemsSource="{Binding Path = MZakaz,  UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedZakaz, UpdateSourceTrigger=PropertyChanged}" Margin="0,42,0,0">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Клиент">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Client1.FirstName"/>
+                                                        <Binding Path="Client1.LastName"/>
+                                                        <Binding Path="Client1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path = Gruz}"/>
+                                            <GridViewColumn Header="Тип груза" DisplayMemberBinding="{Binding Path = Tip_gruza1.Name}"/>
+                                            <GridViewColumn Header="Адрес доставки" DisplayMemberBinding="{Binding Path = AdressDostavki}"/>
+                                            <GridViewColumn Header="Стоимость" DisplayMemberBinding="{Binding Path = Price_gruz}"/>
+                                            <GridViewColumn Header="Курьер">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Dostavka1.Courier1.FirstName"/>
+                                                        <Binding Path="Dostavka1.Courier1.LastName"/>
+                                                        <Binding Path="Dostavka1.Courier1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Дата оформления" DisplayMemberBinding="{Binding Path = DataOformleniya}"/>
+                                            <GridViewColumn Header="Дата закрытия" DisplayMemberBinding="{Binding Path = DataVruchenia}"/>
+                                            <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path = Status1.Name}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Grid DataContext="{Binding MZakaz}">
+                                    <TextBlock HorizontalAlignment="Left" Margin="7,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="Количество записей: {0}">
+                                                <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Отменен" DataContext="{Binding z4}">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView x:Name="ListViewMain" ItemsSource="{Binding Path = MZakaz,  UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedZakaz, UpdateSourceTrigger=PropertyChanged}" Margin="0,42,0,0">
+                                    <ListView.View>
+                                        <GridView x:Name="SupplyGridView">
+                                            <GridViewColumn Header="Клиент">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Client1.FirstName"/>
+                                                        <Binding Path="Client1.LastName"/>
+                                                        <Binding Path="Client1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Path = Gruz}"/>
+                                            <GridViewColumn Header="Тип груза" DisplayMemberBinding="{Binding Path = Tip_gruza1.Name}"/>
+                                            <GridViewColumn Header="Адрес доставки" DisplayMemberBinding="{Binding Path = AdressDostavki}"/>
+                                            <GridViewColumn Header="Стоимость" DisplayMemberBinding="{Binding Path = Price_gruz}"/>
+                                            <GridViewColumn Header="Курьер">
+                                                <GridViewColumn.DisplayMemberBinding>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="Dostavka1.Courier1.FirstName"/>
+                                                        <Binding Path="Dostavka1.Courier1.LastName"/>
+                                                        <Binding Path="Dostavka1.Courier1.MiddleName"/>
+                                                    </MultiBinding>
+                                                </GridViewColumn.DisplayMemberBinding>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Дата оформления" DisplayMemberBinding="{Binding Path = DataOformleniya}"/>
+                                            <GridViewColumn Header="Дата закрытия" DisplayMemberBinding="{Binding Path = DataVruchenia}"/>
+                                            <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path = Status1.Name}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Grid DataContext="{Binding MZakaz}">
+                                    <TextBlock HorizontalAlignment="Left" Margin="7,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="Количество записей: {0}">
+                                                <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

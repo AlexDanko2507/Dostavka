@@ -15,15 +15,13 @@ using System.Windows.Shapes;
 namespace WpfApplication1
 {
     /// <summary>
-    /// Логика взаимодействия для CourierWindow.xaml
+    /// Логика взаимодействия для otchetCourier.xaml
     /// </summary>
-    public partial class CourierWindow : Window
+    public partial class otchetCourier : Window
     {
-        public CourierWindow()
+        public otchetCourier()
         {
             InitializeComponent();
-            //CourierWindow vm = new CourierWindow();
-            //DataContext = vm;
         }
     }
 }

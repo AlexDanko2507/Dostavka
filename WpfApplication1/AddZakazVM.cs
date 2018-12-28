@@ -13,12 +13,14 @@ using Model;
 
 namespace WpfApplication1
 {
-    class AddZakazVM : INotifyPropertyChanged
+    class AddZakazVM : INotifyPropertyChanged, IRequireViewIdentification
     {
         DBConnection db;
+        public Guid ViewID { get; }
         bool check = false;
         private string user;
         private Model.Zakaz selectedZakaz;
+        private Model.Zakaz checkZ;
         private Tip_gruza tipgruza;
         public ObservableCollection<Model.Zakaz> cl { get; set; }
         public ObservableCollection<Tip_gruza> tipg { get; set; }
@@ -33,6 +35,28 @@ namespace WpfApplication1
             tipg = new ObservableCollection<Tip_gruza>(db.Tip_gruza);
             clients = new ObservableCollection<Client>(db.Client);
             SelectedZakaz = db.Zakaz.FirstOrDefault();
+        }
+
+        public AddZakazVM(DBConnection db, string login, Model.Zakaz z)
+        {
+            this.db = db;
+            user = login;
+            checkZ = z;
+            cl = new ObservableCollection<Model.Zakaz>(db.Zakaz);
+            tipg = new ObservableCollection<Tip_gruza>(db.Tip_gruza);
+            clients = new ObservableCollection<Client>(db.Client);
+            SelectedZakaz = db.Zakaz.FirstOrDefault();
+            FirstName = z.Client1.FirstName;
+            LastName = z.Client1.LastName;
+            MiddleName = z.Client1.MiddleName;
+            Phone = z.Client1.Phone;
+            Adress = z.Client1.Adress;
+            Date = z.Client1.HappyBirthday;
+            AdressDostavki = z.AdressDostavki;
+            SelectedTipGruza = z.Tip_gruza1;
+            Gruz = z.Gruz;
+            Km = Convert.ToString(z.Km);
+            //PriceGruz = Convert.ToString(z.Price_gruz);
         }
 
         public Tip_gruza SelectedTipGruza
@@ -183,6 +207,10 @@ namespace WpfApplication1
                             Adress = cll.Adress;
                             Date = cll.HappyBirthday;
                         }
+                        else
+                        {
+                            MessageBox.Show("Клиент не найден!");
+                        }
                     }));
             }
         }
@@ -195,38 +223,59 @@ namespace WpfApplication1
                 return addZakaz ??
                 (addZakaz = new RelayCommand(obj =>
                 {
-                    if (AdressDostavki != null && SelectedTipGruza != null && FirstName != null && LastName != null && Phone != null && Date != null && Adress != null && Gruz != null && Km != null && PriceGruz != null)
+                    if (AdressDostavki != null && SelectedTipGruza != null && FirstName != null && LastName != null && Phone != null && Date != null && Adress != null && Gruz != null && Km != null)
                     {
-                        var tp = db.Tip_gruza.Find(SelectedTipGruza.Id);
-                        var o = db.Operator.Where(i => i.Login == user).FirstOrDefault().Id;
-                        Model.Zakaz z = new Model.Zakaz();
-                        if (!check)
+                        if (checkZ == null)
                         {
-                            Client c = new Client();
-                            c.FirstName = FirstName;
-                            c.LastName = LastName;
-                            c.MiddleName = middleName;
-                            c.Phone = Phone;
-                            c.HappyBirthday = Date;
-                            c.Adress = Adress;
-                            db.Client.Add(c);
+                            var tp = db.Tip_gruza.Find(SelectedTipGruza.Id);
+                            var o = db.Operator.Where(i => i.Login == user).FirstOrDefault().Id;
+                            Model.Zakaz z = new Model.Zakaz();
+                            if (!check)
+                            {
+                                Client c = new Client();
+                                c.FirstName = FirstName;
+                                c.LastName = LastName;
+                                c.MiddleName = middleName;
+                                c.Phone = Phone;
+                                c.HappyBirthday = Date;
+                                c.Adress = Adress;
+                                c.Skidka = 5;
+                                db.Client.Add(c);
+                                db.SaveChanges();
+                                z.Client = c.Id;
+                            }
+                            else
+                            {
+                                var ck = db.Client.Where(i => i.Phone == Phone).FirstOrDefault();
+                                z.Client = ck.Id;
+                            }
+
+                            z.Gruz = Gruz;
+                            z.Tip_gruza = tp.Id;
+                            z.Km = Convert.ToInt32(Km);
+                            z.Price_gruz = tp.K * z.Km;
+                            z.Status = 1;
+                            z.Operator = o;
+                            z.AdressDostavki = AdressDostavki;
+                            z.DataOformleniya = DateTime.Now;
+                            db.Zakaz.Add(z);
                             db.SaveChanges();
-                            z.Client = c.Id;
+                            WindowMeneger.CloseWindow(ViewID);
                         }
                         else
                         {
-                            var ck = db.Client.Where(i => i.Phone == Phone).FirstOrDefault();
-                            z.Client = ck.Id;
+                            db.Zakaz.Find(checkZ.Id).Client1.FirstName = FirstName;
+                            db.Zakaz.Find(checkZ.Id).Client1.LastName = LastName;
+                            db.Zakaz.Find(checkZ.Id).Client1.MiddleName = MiddleName;
+                            db.Zakaz.Find(checkZ.Id).Client1.Adress = Adress;
+                            db.Zakaz.Find(checkZ.Id).Gruz = Gruz;
+                            db.Zakaz.Find(checkZ.Id).Tip_gruza = db.Tip_gruza.Find(SelectedTipGruza.Id).Id;
+                            db.Zakaz.Find(checkZ.Id).Km = Convert.ToInt32(Km);
+                            db.Zakaz.Find(checkZ.Id).Price_gruz = Convert.ToDouble(PriceGruz);
+                            db.Zakaz.Find(checkZ.Id).AdressDostavki = AdressDostavki;
+                            db.SaveChanges();
+                            WindowMeneger.CloseWindow(ViewID);
                         }
-                        
-                        z.Gruz = Gruz;
-                        z.Km = Convert.ToInt32(Km);
-                        z.Price_gruz = Convert.ToDouble(PriceGruz);
-                        z.Status = 1;
-                        z.Tip_gruza = tp.Id;
-                        z.Operator = o;
-                        z.AdressDostavki = AdressDostavki;
-
                     }
                     else
                     {
